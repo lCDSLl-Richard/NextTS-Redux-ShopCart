@@ -1,8 +1,7 @@
 import Card from "@/components/Card";
 import { Item } from "./Interfaces/Item";
 import CartProvider from "@/components/CartProvider";
-
-const url = new URL("https://fakestoreapi.com/products");
+import { url } from "./async";
 
 async function fetchItems() {
   const res = await fetch(url);

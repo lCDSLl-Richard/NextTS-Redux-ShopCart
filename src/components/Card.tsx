@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import store from "@/app/redux/store";
 import { useAppDispatch, useAppSelector } from "@/app/hooks/redux";
 import { addItem } from "@/app/redux/cartSlice";
+import Link from "next/link";
 
 interface Props {
   item: Item;
@@ -27,12 +28,20 @@ const Card = ({ item }: Props) => {
           <Image src={item.image} alt={item.title} fill />
         </div>
         <div className="w-full my-5 h-10">
-          <button
-            className="bg-slate-400 hover:cursor-pointer rounded-lg shadow-lg w-5/6 h-full active:transition-all active:translate-y-0.5"
-            onClick={() => dispatch(addItem(item))}
-          >
-            {containsItem ? "Go to cart" : "Add to cart"}
-          </button>
+          {containsItem ? (
+            <Link href={"/cart"}>
+              <button className="bg-slate-400 hover:cursor-pointer rounded-lg shadow-lg w-5/6 h-full active:transition-all active:translate-y-0.5">
+                Go to cart
+              </button>
+            </Link>
+          ) : (
+            <button
+              className="bg-slate-400 hover:cursor-pointer rounded-lg shadow-lg w-5/6 h-full active:transition-all active:translate-y-0.5"
+              onClick={() => dispatch(addItem(item))}
+            >
+              Add to cart
+            </button>
+          )}
         </div>
       </article>
     </Provider>
